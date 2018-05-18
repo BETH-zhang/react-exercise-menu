@@ -27,7 +27,7 @@ TODO
   * Tree组件（基础组件）
   * TreeNode组件（基础组件）
 * 像素级UI样式
-* 打印git commit纪录
+* 打印git commit日志
 
 #### Example
 TODO
@@ -57,4 +57,7 @@ key | 节点的唯一标示 | String | 0、1、2... |
 isLeaf | 是否是叶子节点 | bool |  false |
 
 #### Commit日志
+TODO
+
+#### 扩展性
 TODO
