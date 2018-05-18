@@ -4,6 +4,7 @@
   "description": "React组件练习",
   "main": "index.js",
   "scripts": {
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/BETH-zhang/react-exercise-menu/issues"
   },
-  "homepage": "https://github.com/BETH-zhang/react-exercise-menu#readme"
+  "homepage": "https://github.com/BETH-zhang/react-exercise-menu#readme",
+  "devDependencies": {
+    "changelog": "^1.4.2"
+  }
 }
