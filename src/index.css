@@ -3,3 +3,16 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.App {
+  
+}
+
+/* 页面布局 */
+.layout-left {
+  float: left;
+  width: 782px;
+  height: 100vh;
+  min-height: 100vh;
+  background: #607d8b;
+}
