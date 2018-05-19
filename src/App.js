@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import Menu from './component/Menu';
+import menuData from './data/menu.json';
 import './App.css';
 
+console.log(menuData, 'menuData');
 class App extends Component {
   render() {
     return (
       <div className="App">
         <div className="layout-left">
-           Menu component
+           <Menu title={menuData.title} data={menuData.jobs} />
         </div>
         <div className="layout-right">
           <header className="App-header">

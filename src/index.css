@@ -4,15 +4,26 @@ body {
   font-family: sans-serif;
 }
 
-.App {
-  
+.App::before,
+.App::after {
+  content: ' ';
+  display: block;
+  clear: both;
 }
 
 /* 页面布局 */
 .layout-left {
   float: left;
-  width: 782px;
+  width: 466px;
   height: 100vh;
   min-height: 100vh;
   background: #607d8b;
+}
+
+.layout-right {
+  float: right;
+  width: calc(100% - 466px);
+  min-height: 100vh;
+  overflow-y: auto;
+  background: #ffffff;
 }
