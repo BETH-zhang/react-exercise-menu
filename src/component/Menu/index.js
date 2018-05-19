@@ -13,7 +13,7 @@ class Menu extends Component {
   }
 
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       checkedKeys: [],
       data: [],

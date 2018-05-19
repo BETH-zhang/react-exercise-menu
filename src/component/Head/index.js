@@ -12,8 +12,8 @@ class Head extends Component {
     title: '我是默认名字'
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
     }
   }

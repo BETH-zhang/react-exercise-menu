@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { contextTypes } from './index';
 import {
   toArray,
   getNodeChildren,
 } from './utils';
 import './index.css';
+
+export const nodeContextTypes = {
+  ...contextTypes,
+  bTreeNode: PropTypes.shape({
+    onUpCheckConduct: PropTypes.func,
+  })
+};
 
 class TreeNode extends Component {
   static propTypes = {
@@ -14,6 +22,28 @@ class TreeNode extends Component {
     title: PropTypes.any,
     children: PropTypes.any
   }
+
+  static contextTypes = nodeContextTypes;
+
+  static childContextTypes = nodeContextTypes;
+
+  constructor(props) {
+    super(props);
+    console.log(this.context);
+
+    this.state = {};
+  }
+
+  getChildContext() {
+    return {
+      ...this.context,
+      bTreeNode: {
+        onUpCheckConduct: this.onUpCheckConduct,
+      },
+    }
+  }
+
+  onUpCheckConduct = () => {}
 
   renderCheckbox = () => {
     return (

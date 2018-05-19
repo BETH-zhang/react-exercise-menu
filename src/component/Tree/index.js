@@ -24,17 +24,17 @@ export const contextTypes = {
 }
 
 class Tree extends Component {
-  // static propTypes = {
-  //   className: PropTypes.string,
-  //   checkedKeys: PropTypes.any,
-  //   onCheck: PropTypes.func,
-  //   children: PropTypes.any
-  // }
+  static propTypes = {
+    className: PropTypes.string,
+    checkedKeys: PropTypes.any,
+    onCheck: PropTypes.func,
+    children: PropTypes.any
+  }
 
   static childContextTypes = contextTypes;
 
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       expandedKeys: [],
       selectedKeys: [],
