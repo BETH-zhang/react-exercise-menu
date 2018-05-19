@@ -6,7 +6,8 @@ class TreeNode extends Component {
   // static propTypes = {
   //   key: PropTypes.string,
   //   className: PropTypes.string,
-  //   title: PropTypes.any
+  //   title: PropTypes.any,
+  //   children: PropTypes.any
   // }
 
   render() {
@@ -18,7 +19,15 @@ class TreeNode extends Component {
           [this.props.className]: this.props.className
         })}
       >
-        TreeNode
+        <div className="title">
+          <input type="checkbox" />
+          <div className="title-children">
+            {this.props.title}
+          </div>
+        </div>
+        <div className="children">
+          {this.props.children}
+        </div>
       </div>
     );
   }
