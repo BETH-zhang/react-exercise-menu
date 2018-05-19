@@ -27,6 +27,31 @@ class Tree extends Component {
     ));
   }
 
+  getChildContext() {
+    const {} = this.props;
+
+    return {
+      tree: {
+        // root: this,
+
+        renderTreeNode: this.renderTreeNode,
+        isKeyChecked: this.isKeyChecked,
+
+        onNodeClick: this.onNodeClick,
+        onNodeSelect: this.onNodeSelect,
+        onNodeContextMenu: this.onNodeContextMenu,
+        onBatchNodeCheck: this.onBatchNodeCheck,
+        onCheckConductFinished: this.onCheckConductFinished,
+      }
+    }
+  }
+
+  onNodeClick = () => {}
+  onNodeSelect = () => {}
+  onNodeContextMenu = () => {}
+  onBatchNodeCheck = () => {}
+  onCheckConductFinished = () => {}
+
   getSyncProps = (props = {}, prevProps, preState) => {
     console.log('sync props: 同步数据给treenode');
     return null;
@@ -39,7 +64,6 @@ class Tree extends Component {
 
   renderTreeNode = (child, index, level = 0) => {
     console.log(child, index, level);
-    const me = this;
     const {
       selectedKeys = [], halfCheckedKeys = [],
     } = this.state;
@@ -48,7 +72,7 @@ class Tree extends Component {
 
     return React.cloneElement(child, {
       eventKey: key,
-      checked: me.isKeyChecked(key),
+      checked: this.isKeyChecked(key),
       halfChecked: halfCheckedKeys.indexOf(key) !== -1,
     });
   }

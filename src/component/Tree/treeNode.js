@@ -1,5 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
+import {
+  toArray,
+  getNodeChildren,
+} from './utils';
 import './index.css';
 
 class TreeNode extends Component {
@@ -10,7 +14,48 @@ class TreeNode extends Component {
   //   children: PropTypes.any
   // }
 
+  renderCheckbox = () => {
+    return (
+      <input type="checkbox" />
+    );
+  }
+
+  renderSelector = () => {
+    return (<div className="title-children">
+      {this.props.title}
+    </div>);
+  }
+
+  renderChildren = () => {
+    const { pos } = this.props;
+    const { renderTreeNode } = this.context;
+    console.log('this.context', this.context);
+
+    const nodeList = this.getNodeChildren();
+    if (nodeList.length === 0) {
+      return null;
+    }
+
+    return (<div className="children">
+      {
+        React.Children.map(nodeList, (node, index) => (
+          renderTreeNode(node, index, pos)
+        ))
+      }
+    </div>);
+  }
+
+  getNodeChildren = () => {
+    const { children } = this.props;
+    const originList = toArray(children).filter(node => node);
+    const targetList = getNodeChildren(originList);
+
+    return targetList;
+  }
+
   render() {
+    const { checked } = this.props;
+    
     return (
       <div
         key={this.props.currentIndex}
@@ -19,15 +64,12 @@ class TreeNode extends Component {
           [this.props.className]: this.props.className
         })}
       >
+        {checked}
         <div className="title">
-          <input type="checkbox" />
-          <div className="title-children">
-            {this.props.title}
-          </div>
+          {this.renderCheckbox()}
+          {this.renderSelector()}
         </div>
-        <div className="children">
-          {this.props.children}
-        </div>
+        {this.renderChildren()}
       </div>
     );
   }
