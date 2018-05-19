@@ -2,7 +2,50 @@
   "title": "招聘职位",
   "jobs": [
     {
-      "title": "工程研发部门"
+      "title": "工程研发部门",
+      "children": [
+        {
+          "title": "Mac开发工程师",
+          "personCount": 9
+        },
+        {
+          "title": "iOS App测试工程师",
+          "personCount": 17
+        },
+        {
+          "title": "Android远程控制工程师",
+          "personCount": 61
+        },
+        {
+          "title": "Web 前端工程师",
+          "personCount": 31
+        },
+        {
+          "title": "Android 多媒体软件开发工程师",
+          "personCount": 2
+        }
+      ]
+    },
+    {
+      "title": "产品设计部门",
+      "children": [
+        {
+          "title": "网页设计师",
+          "personCount": 41
+        },
+        {
+          "title": "ID／工业设计师",
+          "personCount": 39
+        },
+        {
+          "title": "视觉设计师／GUI界面设计师",
+          "personCount": 42
+        },
+        {
+          "title": "平面设计师",
+          "personCount": 8
+        }
+      ]
     }
   ]
 }
