@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import classNames from 'classnames';
 import './index.css';
 
 class Tree extends Component {
@@ -11,7 +12,12 @@ class Tree extends Component {
 
   render() {
     return (
-      <div className="Tree">
+      <div
+        className={classNames({
+          "Tree": true,
+          [this.props.className]: this.props.className
+        })}
+      >
         {this.props.children}
       </div>
     );

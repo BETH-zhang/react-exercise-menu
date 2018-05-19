@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+import classNames from 'classnames';
 import Head from '../Head';
 import Tree from '../Tree';
 import TreeNode from '../Tree/treeNode';
@@ -26,13 +27,26 @@ class Menu extends Component {
     console.log('点击菜单列表中的checkbox');
   }
 
+  renderTitle = (item) => (<div className="job-title">
+    {item.title}
+    <span
+      className={classNames({
+        'tag': true,
+        'tag-bg': item.children,
+      })}
+    >{item.personCount}</span>
+  </div>)
+
   loop = (data, parentIndex) => data.length && data.map((item, index) => {
-    console.log(item, index);
+    console.log(parentIndex);
     const currentIndex = `${parentIndex}-${index}`;
     return (<TreeNode
-      key={currentIndex}
-      className={`node-${currentIndex}`}
-      title={item.title}
+      level={currentIndex.split('-').length - 1}
+      className={classNames({
+        [`parentIndex-${parentIndex}`]: true,
+        [`node-${currentIndex}`]: true
+      })}
+      title={this.renderTitle(item)}
     >
       {item.children && this.loop(item.children, currentIndex)}
     </TreeNode>);

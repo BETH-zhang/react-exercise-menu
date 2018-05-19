@@ -3,6 +3,7 @@
   "jobs": [
     {
       "title": "工程研发部门",
+      "personCount": 0,
       "children": [
         {
           "title": "Mac开发工程师",
@@ -28,6 +29,7 @@
     },
     {
       "title": "产品设计部门",
+      "personCount": 0,
       "children": [
         {
           "title": "网页设计师",

@@ -1,0 +1,25 @@
+.Menu {
+  margin: 50px 40px 50px 45px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.Menu .menu-tree .job-title {
+}
+
+.Menu .menu-tree .tag {
+  box-sizing: border-box;
+  padding: 3px 10px;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  color: #fff;
+  border-radius: 50px;
+  text-align: right;
+}
+
+.Menu .menu-tree .tag-bg {
+  background: #516a76;
+}
