@@ -15,30 +15,69 @@ class Menu extends Component {
     super();
     this.state = {
       checkedKeys: [],
-      data: props.data.slice() // 复制一份接口数据
+      data: [],
+      statistics: {}
     }
+  }
+
+  componentWillMount() {
+    const initData = this.props.data.slice(); // 复制一份接口数据
+    const statistics = this.initStatistics(initData, 0);
+
+    this.setState({
+      data: initData,
+      statistics,
+    });
+  }
+
+  initStatistics = (data, parentIndex) => {
+    let obj = {};
+    if (data.length) {
+      data.forEach((item, index) => {
+        if (item.children) {
+          const currentIndex = `${parentIndex}-${index}`;
+          obj[`${currentIndex}`] = 0;
+          const objTmp = this.initStatistics(item.children, currentIndex);
+          obj = Object.assign({}, obj, objTmp);
+        }
+      })
+    }
+    return obj;
   }
 
   clearHandle = () => {
     console.log('清除');
+    const statistics = this.state.statistics;
+    Object.keys(statistics).map((key) => {
+      statistics[key] = 0;
+    })
+
+    this.setState({
+      statistics,
+      checkedKeys: []
+    });
   }
 
   onCheck = () => {
     console.log('点击菜单列表中的checkbox');
   }
 
-  renderTitle = (item) => (<div className="job-title">
+  renderTitle = (item, currentIndex) => (<div className="job-title">
     {item.title}
     <span
       className={classNames({
         'tag': true,
         'tag-bg': item.children,
       })}
-    >{item.personCount}</span>
+    >
+      {
+        item.children ? this.state.statistics[currentIndex]
+          : item.personCount
+      }
+    </span>
   </div>)
 
   loop = (data, parentIndex) => data.length && data.map((item, index) => {
-    console.log(parentIndex);
     const currentIndex = `${parentIndex}-${index}`;
     return (<TreeNode
       level={currentIndex.split('-').length - 1}
@@ -46,7 +85,7 @@ class Menu extends Component {
         [`parentIndex-${parentIndex}`]: true,
         [`node-${currentIndex}`]: true
       })}
-      title={this.renderTitle(item)}
+      title={this.renderTitle(item, currentIndex)}
     >
       {item.children && this.loop(item.children, currentIndex)}
     </TreeNode>);

@@ -11,7 +11,6 @@ class TreeNode extends Component {
   // }
 
   render() {
-    console.log(this.props.level, '111');
     return (
       <div
         key={this.props.level}
