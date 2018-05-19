@@ -80,7 +80,7 @@ class Menu extends Component {
   loop = (data, parentIndex) => data.length && data.map((item, index) => {
     const currentIndex = `${parentIndex}-${index}`;
     return (<TreeNode
-      level={currentIndex.split('-').length - 1}
+      currentIndex={currentIndex}
       className={classNames({
         [`parentIndex-${parentIndex}`]: true,
         [`node-${currentIndex}`]: true

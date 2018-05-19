@@ -15,7 +15,7 @@ body {
 .layout-left {
   float: left;
   width: 466px;
-  height: 100vh;
+  /* height: 100vh; */
   min-height: 100vh;
   background: #607d8b;
 }

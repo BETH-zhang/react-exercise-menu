@@ -4,7 +4,7 @@ import './index.css';
 
 class TreeNode extends Component {
   // static propTypes = {
-  //   level: PropTypes.number,
+  //   currentIndex: PropTypes.string,
   //   className: PropTypes.string,
   //   title: PropTypes.any,
   //   children: PropTypes.any
@@ -13,14 +13,11 @@ class TreeNode extends Component {
   render() {
     return (
       <div
-        key={this.props.level}
+        key={this.props.currentIndex}
         className={classNames({
           "TreeNode": true,
           [this.props.className]: this.props.className
         })}
-        style={{
-          marginLeft: `${(this.props.level - 1) * 25}px`
-        }}
       >
         <div className="title">
           <input type="checkbox" />

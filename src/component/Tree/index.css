@@ -2,6 +2,14 @@
   box-sizing: border-box;
 }
 
+.TreeNode .children {
+  margin-left: 25px;
+}
+
+.TreeNode input {
+  cursor: pointer;
+}
+
 .TreeNode .title {
   margin-bottom: 15px;
   position: relative;
@@ -18,7 +26,6 @@
 }
 
 .Tree .parentIndex-0>.title {
-  cursor: pointer;
   font-weight: bolder;
 }
 
