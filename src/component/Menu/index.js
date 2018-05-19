@@ -1,15 +1,16 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import Head from '../Head';
 import Tree from '../Tree';
 import TreeNode from '../Tree/treeNode';
 import './index.css';
 
 class Menu extends Component {
-  // static propTypes = {
-  //   title: PropTypes.string,
-  //   data: PropTypes.ary,
-  // }
+  static propTypes = {
+    title: PropTypes.string,
+    data: PropTypes.ary,
+  }
 
   constructor(props) {
     super();

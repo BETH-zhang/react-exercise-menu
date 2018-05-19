@@ -1,6 +1,27 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import './index.css';
+
+export const contextTypes = {
+  bTree: PropTypes.shape({
+    root: PropTypes.object,
+    checkable: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.node,
+    ]),
+    filterTreeNode: PropTypes.func,
+    renderTreeNode: PropTypes.func,
+
+    isKeyChecked: PropTypes.func,
+
+    onNodeClick: PropTypes.func,
+    onNodeExpand: PropTypes.func,
+    onNodeSelect: PropTypes.func,
+    onBatchNodeCheck: PropTypes.func,
+    onCheckConductFinished: PropTypes.func,
+  })
+}
 
 class Tree extends Component {
   // static propTypes = {
@@ -9,6 +30,8 @@ class Tree extends Component {
   //   onCheck: PropTypes.func,
   //   children: PropTypes.any
   // }
+
+  static childContextTypes = contextTypes;
 
   constructor(props) {
     super();
@@ -28,12 +51,16 @@ class Tree extends Component {
   }
 
   getChildContext() {
-    const {} = this.props;
+    const {
+      checkable, filterTreeNode
+    } = this.props;
 
     return {
-      tree: {
+      bTree: {
         // root: this,
+        checkable,
 
+        filterTreeNode,
         renderTreeNode: this.renderTreeNode,
         isKeyChecked: this.isKeyChecked,
 
@@ -46,8 +73,18 @@ class Tree extends Component {
     }
   }
 
-  onNodeClick = () => {}
-  onNodeSelect = () => {}
+  onNodeClick = (e, treeNode) => {
+    console.log('onNodeSelect');
+    const { onClick } = this.props;
+    if (onClick) {
+      onClick(e, treeNode);
+    }
+  }
+
+  onNodeSelect = (e, treeNode) => {
+    console.log('onNodeSelect');
+  }
+
   onNodeContextMenu = () => {}
   onBatchNodeCheck = () => {}
   onCheckConductFinished = () => {}
@@ -78,7 +115,6 @@ class Tree extends Component {
   }
 
   render() {
-    console.log(React.Children, '===');
     return (
       <div
         className={classNames({

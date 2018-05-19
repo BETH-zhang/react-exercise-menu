@@ -1,11 +1,12 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './index.css';
 
 class Head extends Component {
-  // static propTypes = {
-  //   title: PropTypes.string,
-  //   clearHandle: PropTypes.func,
-  // }
+  static propTypes = {
+    title: PropTypes.string,
+    clearHandle: PropTypes.func,
+  }
 
   static defaultProps = {
     title: '我是默认名字'

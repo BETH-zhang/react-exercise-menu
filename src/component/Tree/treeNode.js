@@ -1,5 +1,6 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import {
   toArray,
   getNodeChildren,
@@ -7,12 +8,12 @@ import {
 import './index.css';
 
 class TreeNode extends Component {
-  // static propTypes = {
-  //   currentIndex: PropTypes.string,
-  //   className: PropTypes.string,
-  //   title: PropTypes.any,
-  //   children: PropTypes.any
-  // }
+  static propTypes = {
+    currentIndex: PropTypes.string,
+    className: PropTypes.string,
+    title: PropTypes.any,
+    children: PropTypes.any
+  }
 
   renderCheckbox = () => {
     return (
