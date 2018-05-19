@@ -59,14 +59,14 @@ class TreeNode extends Component {
 
   renderChildren = () => {
     const { pos } = this.props;
-    const { renderTreeNode } = this.context;
-    console.log('this.context', this.context);
+    const { bTree: { renderTreeNode } } = this.context;
 
     const nodeList = this.getNodeChildren();
     if (nodeList.length === 0) {
       return null;
     }
 
+    console.log('????', this.context);
     return (<div className="children">
       {
         React.Children.map(nodeList, (node, index) => (
@@ -78,7 +78,7 @@ class TreeNode extends Component {
 
   getNodeChildren = () => {
     const { children } = this.props;
-    const originList = toArray(children).filter(node => node);
+    const originList = children ? toArray(children).filter(node => node) : [];
     const targetList = getNodeChildren(originList);
 
     return targetList;
