@@ -16,6 +16,12 @@
   font-weight: 300;
 }
 
+.TreeNode .checkbox img {
+  float: left;
+  width: 24px;
+  height: 24px;
+}
+
 .TreeNode .title-children {
   display: inline-block;
   margin-left: 20px;

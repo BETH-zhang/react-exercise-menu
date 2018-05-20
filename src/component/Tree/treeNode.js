@@ -5,6 +5,10 @@ import { contextTypes } from './index';
 import { toArray, getPosition, getNodeChildren, traverseTreeNodes } from './util';
 import './index.css';
 
+import checkbox1Img from '../../image/checkbox1.png';
+import checkbox2Img from '../../image/checkbox2.png';
+import checkbox3Img from '../../image/checkbox3.png';
+
 const LOAD_STATUS_NONE = 0;
 
 const defaultTitle = '---';
@@ -155,16 +159,23 @@ class TreeNode extends React.Component {
   renderCheckbox = () => {
     const { checked, halfChecked } = this.props;
 
+    let $checked = null;
+    if (halfChecked) {
+      $checked = (<img src={checkbox3Img} />);
+    } else if (checked) {
+      $checked = (<img src={checkbox2Img} />);
+    } else {
+      $checked = (<img src={checkbox1Img} />);
+    }
+
     return (
-      <span>
-        {checked && 'select'}
-        {!checked && halfChecked && 'halfChecked'}
-        {!checked && 'default'}
-        {
+      <span className="checkbox" onClick={this.onCheck}>
+        {$checked}
+        {/*
           checked ?
           <input type="checkbox" checked onClick={this.onCheck} />
           : <input type="checkbox" checked={false} onClick={this.onCheck} />
-        }
+        */}
       </span>
     );
   };
