@@ -22,7 +22,7 @@ body {
 
 .layout-right {
   float: right;
-  width: calc(100% - 466px);
+  width: calc(100% - 932px);
   min-height: 100vh;
   overflow-y: auto;
   background: #ffffff;

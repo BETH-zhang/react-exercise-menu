@@ -1,6 +1,6 @@
 {
   "title": "招聘职位",
-  "jobs1": [
+  "jobs": [
     {
       "title": "工程研发部门",
       "personCount": 0,
@@ -50,7 +50,8 @@
       ]
     }
   ],
-  "jobs": [
+  "title1": "存在多级别的人数统计",
+  "jobs1": [
     {
       "title": "工程研发部门",
       "personCount": 0,

@@ -12,6 +12,9 @@ class App extends Component {
         <div className="layout-left">
            <Menu title={menuData.title} data={menuData.jobs} />
         </div>
+        <div className="layout-left" style={{ float: "right" }}>
+           <Menu title={menuData.title1} data={menuData.jobs1} />
+        </div>
         <div className="layout-right">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
