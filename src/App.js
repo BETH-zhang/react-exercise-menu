@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './image/2018beth.jpeg';
 import Menu from './component/Menu';
 import menuData from './data/menu.json';
 import './App.css';
@@ -17,7 +16,7 @@ class App extends Component {
         </div>
         <div className="layout-right">
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
+            <img src="https://github.com/BETH-zhang/react-exercise-menu/blob/master/src/image/2018beth.jpeg?raw=true" className="App-logo" alt="logo" />
             <h1 className="App-title">Welcome to React</h1>
           </header>
           <p className="App-intro">
