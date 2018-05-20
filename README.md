@@ -3,9 +3,9 @@
 
 #### 截屏（Screenshots）
 
-标注图 | 展示图 |
-:-------|:------|
-![](./doc/UI.jpg) | ![](./doc/app.gif) |
+标注图 | 展示图 | 多层数据 |
+:-------|:------|:------|
+![](./doc/UI.jpg) | ![](./doc/app.gif) | ![](./doc/app1.gif) |
 
 #### 功能点（Feature）
 * 点击清空:清空所有选项(所有选项都变成unchecked)
@@ -27,6 +27,7 @@
 * 定义前端的state对象数据结构
 * 拆分组件
   * Menu组件（业务组件）
+  * Head组件 (业务组件)
   * Tree组件（基础组件）
   * TreeNode组件（基础组件）
 * 像素级UI样式
@@ -44,13 +45,21 @@ name | description | type | default |
 title | 菜单名称 | String | '我是默认名字' |
 data | 菜单的远程接口数据 | Array | [] |
 
+##### Head props
+
+name | description | type | default |
+:-------|:------|:-----|:------|
+title | 菜单名称 | String | '我是默认名字' |
+clearHandle | 清除所有数据的方法 | Function |  |
+
 ##### Tree props
 
 name | description | type | default |
 :-------|:------|:-----|:------|
 className | 添加到dom节点上的自定义样式 | String | '' |
-checkedKeys | 所有被选择的treeNode | String[] | [] |
+expandedKeys | 所有被选择的treeNode Key | String[] | [] |
 onCheck | 点击当前界点或checkbox的事件监听 | function(checkedKeys, e: {}) | - |
+children | 子元素dom节点 | element | |
 
 ##### TreeNode props
 
@@ -59,7 +68,9 @@ name | description | type | default |
 className | 添加到dom节点上的自定义样式 | String | '' |
 title | 节点的title | String/element | - |
 key | 节点的唯一标示 | String | 0、1、2... |
-isLeaf | 是否是叶子节点 | bool |  false |
+checked | 当前节点的选中状态  |  bool | false |
+halfChecked | 父节点的选中状态 | bool | false |
+children | 子元素dom节点 | element | |
 
 #### Commit日志
 

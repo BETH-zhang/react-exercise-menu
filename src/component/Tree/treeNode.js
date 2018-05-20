@@ -25,10 +25,8 @@ class TreeNode extends React.Component {
     eventKey: PropTypes.string, // Pass by parent `cloneElement`
     className: PropTypes.string,
     root: PropTypes.object,
-    onSelect: PropTypes.func,
 
     // By parent
-    selected: PropTypes.bool,
     checked: PropTypes.bool,
     halfChecked: PropTypes.bool,
     children: PropTypes.node,
