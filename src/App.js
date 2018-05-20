@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './image/2018beth.jpeg';
 import Menu from './component/Menu';
 import menuData from './data/menu.json';
 import './App.css';
@@ -18,7 +18,7 @@ class App extends Component {
             <h1 className="App-title">Welcome to React</h1>
           </header>
           <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
+            带你玩React吧，嘿嘿嘿
           </p>
         </div>
       </div>

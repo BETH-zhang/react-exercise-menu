@@ -2,7 +2,9 @@
 -----
 
 #### 截屏（Screenshots）
-TODO
+标注图 | 展示图 |
+:-------|:------|
+![](./doc/UI.jpg) | ![](./doc/app.gif) |
 
 #### 功能点（Feature）
 * 点击清空:清空所有选项(所有选项都变成unchecked)
