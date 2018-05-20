@@ -15,7 +15,7 @@ class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expandedKeys: ["0-0-0-count-9"],
+      expandedKeys: [],
       data: [],
       statistics: {}
     }
@@ -59,8 +59,25 @@ class Menu extends Component {
     });
   }
 
+  getStatistics = (expandedKeys) => {
+    const statistics = this.state.statistics;
+    Object.keys(statistics).map((key) => {
+      let count = 0;
+      expandedKeys.forEach((item) => {
+        if (item.indexOf(key) === 0) {
+          const ary = item.split('-');
+          count = count + Number(ary[ary.length - 1]);
+        }
+      });
+      statistics[key] = count;
+    })
+
+    return statistics;
+  }
+
   onCheck = (expandedKeys, info) => {
     console.log('onCheck:', expandedKeys, info);
+    const statistics = this.getStatistics(expandedKeys);
     this.setState({
       expandedKeys,
     });
