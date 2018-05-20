@@ -15,7 +15,7 @@ class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checkedKeys: [],
+      expandedKeys: ["0-0-0-count-9"],
       data: [],
       statistics: {}
     }
@@ -55,12 +55,15 @@ class Menu extends Component {
 
     this.setState({
       statistics,
-      checkedKeys: []
+      expandedKeys: []
     });
   }
 
-  onCheck = () => {
-    console.log('点击菜单列表中的checkbox');
+  onCheck = (expandedKeys, info) => {
+    console.log('onCheck:', expandedKeys, info);
+    this.setState({
+      expandedKeys,
+    });
   }
 
   renderTitle = (item, currentIndex) => (<div className="job-title">
@@ -81,6 +84,7 @@ class Menu extends Component {
   loop = (data, parentIndex) => data.length && data.map((item, index) => {
     const currentIndex = `${parentIndex}-${index}`;
     return (<TreeNode
+      key={`${currentIndex}-count-${item.personCount}`}
       currentIndex={currentIndex}
       className={classNames({
         [`parentIndex-${parentIndex}`]: true,
@@ -103,7 +107,7 @@ class Menu extends Component {
 
         <Tree
           className="menu-tree"
-          checkedKeys={this.state.checkedKeys}
+          expandedKeys={this.state.expandedKeys}
           onCheck={this.onCheck}
         >
           {this.loop(this.state.data, 0)}

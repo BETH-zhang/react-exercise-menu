@@ -1,37 +1,51 @@
-import React, { Component } from 'react';
-import classNames from 'classnames';
+import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { contextTypes } from './index';
-import {
-  toArray,
-  getNodeChildren,
-} from './utils';
+import { toArray, getPosition, getNodeChildren, traverseTreeNodes } from './util';
 import './index.css';
+
+const LOAD_STATUS_NONE = 0;
+
+const defaultTitle = '---';
 
 export const nodeContextTypes = {
   ...contextTypes,
   bTreeNode: PropTypes.shape({
     onUpCheckConduct: PropTypes.func,
-  })
+  }),
 };
 
-class TreeNode extends Component {
+class TreeNode extends React.Component {
   static propTypes = {
-    currentIndex: PropTypes.string,
+    eventKey: PropTypes.string, // Pass by parent `cloneElement`
     className: PropTypes.string,
-    title: PropTypes.any,
-    children: PropTypes.any
-  }
+    root: PropTypes.object,
+    onSelect: PropTypes.func,
+
+    // By parent
+    selected: PropTypes.bool,
+    checked: PropTypes.bool,
+    halfChecked: PropTypes.bool,
+    children: PropTypes.node,
+    title: PropTypes.node,
+    pos: PropTypes.string,
+  };
 
   static contextTypes = nodeContextTypes;
 
   static childContextTypes = nodeContextTypes;
 
+  static defaultProps = {
+    title: defaultTitle,
+  };
+
   constructor(props) {
     super(props);
-    console.log(this.context);
 
-    this.state = {};
+    this.state = {
+      loadStatus: LOAD_STATUS_NONE,
+    };
   }
 
   getChildContext() {
@@ -40,17 +54,122 @@ class TreeNode extends Component {
       bTreeNode: {
         onUpCheckConduct: this.onUpCheckConduct,
       },
+    };
+  }
+
+  onUpCheckConduct = (treeNode, nodeChecked, nodeHalfChecked, e) => {
+    const { pos: nodePos } = treeNode.props;
+    const { eventKey, pos, checked, halfChecked } = this.props;
+    const {
+      bTree: { isKeyChecked, onBatchNodeCheck, onCheckConductFinished },
+      bTreeNode: { onUpCheckConduct } = {},
+    } = this.context;
+
+    const children = this.getNodeChildren();
+
+    let checkedCount = nodeChecked ? 1 : 0;
+
+    // Statistic checked count
+    children.forEach((node, index) => {
+      const childPos = getPosition(pos, index);
+
+      if (nodePos === childPos) {
+        return;
+      }
+
+      if (isKeyChecked(node.key || childPos)) {
+        checkedCount += 1;
+      }
+    });
+
+    // Static enabled children count
+    const enabledChildrenCount = children
+      .filter(node => node)
+      .length;
+
+    // checkStrictly will not conduct check status
+    const nextChecked = enabledChildrenCount === checkedCount;
+    const nextHalfChecked = (nodeHalfChecked || (checkedCount > 0 && !nextChecked));
+
+    // Add into batch update
+    if (checked !== nextChecked || halfChecked !== nextHalfChecked) {
+      onBatchNodeCheck(eventKey, nextChecked, nextHalfChecked);
+
+      if (onUpCheckConduct) {
+        onUpCheckConduct(this, nextChecked, nextHalfChecked, e);
+      } else {
+        // Flush all the update
+        onCheckConductFinished(e);
+      }
+    } else {
+      // Flush all the update
+      onCheckConductFinished(e);
     }
-  }
+  };
 
-  onUpCheckConduct = () => {}
+  onDownCheckConduct = (nodeChecked) => {
+    const { children } = this.props;
+    const { bTree: { isKeyChecked, onBatchNodeCheck } } = this.context;
 
+    traverseTreeNodes(children, ({ node, key }) => {
+      if (nodeChecked !== isKeyChecked(key)) {
+        onBatchNodeCheck(key, nodeChecked, false);
+      }
+    });
+  };
+
+  onCheck = (e) => {
+    const { checked, eventKey } = this.props;
+    const {
+      bTree: { onBatchNodeCheck, onCheckConductFinished },
+      bTreeNode: { onUpCheckConduct } = {},
+    } = this.context;
+
+    // e.preventDefault(); // 阻止事件默认动作
+    const targetChecked = !checked;
+    onBatchNodeCheck(eventKey, targetChecked, false, this);
+
+    // Children conduct
+    this.onDownCheckConduct(targetChecked);
+
+    // Parent conduct
+    if (onUpCheckConduct) {
+      onUpCheckConduct(this, targetChecked, false, e);
+    } else {
+      onCheckConductFinished(e);
+    }
+  };
+
+  getNodeChildren = () => {
+    const { children } = this.props;
+    let targetList = [];
+    if (children) {
+      const originList = toArray(children).filter(node => node);
+      targetList = getNodeChildren(originList);
+    }
+
+    return targetList;
+  };
+
+  // Checkbox
   renderCheckbox = () => {
-    return (
-      <input type="checkbox" />
-    );
-  }
+    const { checked, halfChecked } = this.props;
 
+    return (
+      <span>
+        {checked && 'select'}
+        {!checked && halfChecked && 'halfChecked'}
+        {!checked && 'default'}
+        {
+          checked ?
+          <input type="checkbox" checked onClick={this.onCheck} />
+          : <input type="checkbox" checked={false} onClick={this.onCheck} />
+        }
+      </span>
+    );
+  };
+
+  // Title
   renderSelector = () => {
     return (<div className="title-children">
       {this.props.title}
@@ -66,7 +185,6 @@ class TreeNode extends Component {
       return null;
     }
 
-    console.log('????', this.context);
     return (<div className="children">
       {
         React.Children.map(nodeList, (node, index) => (
@@ -76,17 +194,7 @@ class TreeNode extends Component {
     </div>);
   }
 
-  getNodeChildren = () => {
-    const { children } = this.props;
-    const originList = children ? toArray(children).filter(node => node) : [];
-    const targetList = getNodeChildren(originList);
-
-    return targetList;
-  }
-
   render() {
-    const { checked } = this.props;
-    
     return (
       <div
         key={this.props.currentIndex}
@@ -95,7 +203,6 @@ class TreeNode extends Component {
           [this.props.className]: this.props.className
         })}
       >
-        {checked}
         <div className="title">
           {this.renderCheckbox()}
           {this.renderSelector()}
@@ -105,5 +212,7 @@ class TreeNode extends Component {
     );
   }
 }
+
+TreeNode.isTreeNode = 1;
 
 export default TreeNode;
