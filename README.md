@@ -2,6 +2,7 @@
 -----
 
 #### 截屏（Screenshots）
+
 标注图 | 展示图 |
 :-------|:------|
 ![](./doc/UI.jpg) | ![](./doc/app.gif) |
@@ -32,7 +33,7 @@
 * 打印git commit日志
 
 #### Example
-TODO
+[http://qiuge.me/react-exercise-menu/](http://qiuge.me/react-exercise-menu/)
 
 #### 组件API（Component API）
 -----
@@ -44,6 +45,7 @@ title | 菜单名称 | String | '我是默认名字' |
 data | 菜单的远程接口数据 | Array | [] |
 
 ##### Tree props
+
 name | description | type | default |
 :-------|:------|:-----|:------|
 className | 添加到dom节点上的自定义样式 | String | '' |
@@ -51,6 +53,7 @@ checkedKeys | 所有被选择的treeNode | String[] | [] |
 onCheck | 点击当前界点或checkbox的事件监听 | function(checkedKeys, e: {}) | - |
 
 ##### TreeNode props
+
 name | description | type | default |
 :-------|:------|:-----|:------|
 className | 添加到dom节点上的自定义样式 | String | '' |
@@ -59,7 +62,28 @@ key | 节点的唯一标示 | String | 0、1、2... |
 isLeaf | 是否是叶子节点 | bool |  false |
 
 #### Commit日志
-TODO
+
+[全部提交纪录地址：https://github.com/BETH-zhang/react-exercise-menu/commits/master](https://github.com/BETH-zhang/react-exercise-menu/commits/master)
+##### 部分Commit 记录 1.0.0 (2018-05-20)
+
+###### Features
+
+* **count:** 完成计算子阶段人数到父节点上 ([ece5ab4](https://github.com/BETH-zhang/react-exercise-menu/commit/ece5ab4))
+* **icon:** 更新图标颜色 ([9193598](https://github.com/BETH-zhang/react-exercise-menu/commit/9193598))
+* **icon:** 添加三种状态的checkbox图标 ([f0e430f](https://github.com/BETH-zhang/react-exercise-menu/commit/f0e430f))
+* **logo:** 添加自己的logo ([ffe1729](https://github.com/BETH-zhang/react-exercise-menu/commit/ffe1729))
+* **prop-types:** 添加props的参数类型校验 ([970cce7](https://github.com/BETH-zhang/react-exercise-menu/commit/970cce7))
+* **tree:** 利用getChildContext将Tree组件获取到的node节点通过context传给TreeNode组件 ([f270360](https://github.com/BETH-zhang/react-exercise-menu/commit/f270360))
+* **tree:** 完成Tree和TreeNode的基础组件 ([c41a00c](https://github.com/BETH-zhang/react-exercise-menu/commit/c41a00c))
+* **tree:** 实现Tree和TreeNode阶段的数据自定义数据渲染 ([70b1f7a](https://github.com/BETH-zhang/react-exercise-menu/commit/70b1f7a))
+* **treenode:** 注册ContextTypes以保证Tree和TreeNode通过context进行信息的交互 ([ba90a34](https://github.com/BETH-zhang/react-exercise-menu/commit/ba90a34))
+
 
 #### 扩展性
-TODO
+目前实现的简单版本TreeSelect组件，其扩展性非常多。（参考rc-tree组件的开发思想）
+
+* 添加整个TreeNode节点的事件监听
+* 添加TreeNode节点的拖拽事件
+* 添加Tree的继承样式
+* 添加Tree的新属性，使其可以添加菜单的折叠功能
+* 只要希望在存在的功能，都可以很好的自定义追加进去
