@@ -1,0 +1,40 @@
+.TreeNode {
+  box-sizing: border-box;
+}
+
+.TreeNode .children {
+  margin-left: 25px;
+}
+
+.TreeNode input {
+  cursor: pointer;
+}
+
+.TreeNode .title {
+  margin-bottom: 15px;
+  position: relative;
+  font-weight: 300;
+}
+
+.TreeNode .checkbox img {
+  float: left;
+  width: 24px;
+  height: 24px;
+}
+
+.TreeNode .title-children {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.Tree .parentIndex-0 {
+  margin-top: 25px;
+}
+
+.Tree .parentIndex-0>.title {
+  font-weight: bolder;
+}
+
+.Tree .parentIndex-0>.children {
+  margin-top: 25px;
+}
